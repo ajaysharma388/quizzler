@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './question.dart';
+
 void main() => runApp(Quizzler());
 
 class Quizzler extends StatelessWidget {
@@ -27,18 +29,17 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   int score = 0;
   int cur_question = 0;
-  List<String> question = [
-    'Did lary page started google?',
-    'Did Paytm is US Based Company?',
-    'Is Kohli is still a captian for india?',
-    'Delhi is complete state in india?',
-    'PM Modi is feku?',
-    'Rahul Gandhi Can be a next PM?',
+  List<Question> question = [
+    Question(q: 'Did lary page started google?', a: true),
+    Question(q: 'Did Paytm is US Based Company?', a: false),
+    Question(q: 'Is Kohli is still a captian for india?', a: true),
+    Question(q: 'Delhi is complete state in india?', a: false),
+    Question(q: 'PM Modi is feku?', a: true),
+    Question(q: 'Rahul Gandhi Can be a next PM?', a: true),
   ];
-  List<bool> ans = [true, false, true, false, true, true];
   List<Icon> scoreKeeper = [];
   void check(bool a, int q) {
-    if (ans[q] == a) {
+    if (question[q].QuestionAnswer == a) {
       scoreKeeper.add(Icon(
         Icons.check,
         color: Colors.green,
@@ -67,7 +68,7 @@ class _QuizPageState extends State<QuizPage> {
             child: Center(
               child: Text(
                 (cur_question < 6)
-                    ? question[cur_question]
+                    ? question[cur_question].QuestionStatement
                     : 'Your score is $score out of $val',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -126,9 +127,3 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
-
-/*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
-*/
