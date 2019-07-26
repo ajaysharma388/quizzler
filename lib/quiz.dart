@@ -14,7 +14,7 @@ class _QuizPageState extends State<QuizPage> {
   int cur_question = 0;
   List<Icon> scoreKeeper = [];
   void check(bool a, int Q) {
-    if (q.question[Q].QuestionAnswer == a) {
+    if (q.getQA(Q) == a) {
       scoreKeeper.add(Icon(
         Icons.check,
         color: Colors.green,
@@ -31,7 +31,7 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    int val = q.question.indexOf(q.question.last) + 1;
+    int val = q.getTotalQuestion();
     return Scaffold(
       backgroundColor: Colors.lightBlue[500],
       body: Column(
@@ -45,7 +45,7 @@ class _QuizPageState extends State<QuizPage> {
               child: Center(
                 child: Text(
                   (cur_question < val)
-                      ? q.question[cur_question].QuestionStatement + ' ?'
+                      ? q.getQuestionStatement(cur_question) + ' ?'
                       : 'Your score is $score out of $val',
                   textAlign: TextAlign.center,
                   style: TextStyle(

@@ -1,7 +1,7 @@
 import './question.dart';
 
 class QuestionBank {
-  List<Question> question = [
+  List<Question> _question = [
     Question(q: 'Some cats are actually allergic to humans', a: true),
     Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
     Question(
@@ -30,4 +30,15 @@ class QuestionBank {
         q: 'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',
         a: true),
   ];
+  String getQuestionStatement(int n) {
+    return _question[n].QuestionStatement;
+  }
+
+  bool getQA(int n) {
+    return _question[n].QuestionAnswer;
+  }
+
+  int getTotalQuestion() {
+    return _question.indexOf(_question.last) + 1;
+  }
 }
