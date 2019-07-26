@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './contact.dart';
+import './developercard.dart';
 import './quizchoice.dart';
 
 class QuizController extends StatefulWidget {
@@ -25,12 +27,25 @@ class _QuizControllerState extends State<QuizController> {
           PopupMenuButton<Choice>(
             onSelected: _select,
             itemBuilder: (BuildContext context) {
-              return choices.skip(0).map((Choice choice) {
+              return choices.map((Choice choice) {
                 return PopupMenuItem<Choice>(
                   value: choice,
                   child: ListTile(
                     leading: Icon(choice.icon),
                     title: Text(choice.title),
+                    onTap: () {
+                      if (choice.icon == Icons.face) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DeveloperProfile()));
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DeveloperCard()));
+                      }
+                    },
                   ),
                 );
               }).toList();
