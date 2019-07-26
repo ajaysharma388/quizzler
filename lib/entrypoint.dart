@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './quiz.dart';
+import './quizcontroller.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -71,8 +71,10 @@ class _MyAppState extends State<MyApp> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => QuizPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => QuizController()));
                   },
                 ),
               ),

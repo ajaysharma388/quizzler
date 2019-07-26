@@ -45,12 +45,13 @@ class _QuizPageState extends State<QuizPage> {
               child: Center(
                 child: Text(
                   (cur_question < val)
-                      ? q.question[cur_question].QuestionStatement
+                      ? q.question[cur_question].QuestionStatement + ' ?'
                       : 'Your score is $score out of $val',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 25.0,
+                    fontSize: 30.0,
                     color: Colors.white,
+                    fontFamily: 'Pacifico',
                   ),
                 ),
               ),
@@ -66,7 +67,8 @@ class _QuizPageState extends State<QuizPage> {
                   'True',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 25.0,
+                    fontSize: 30.0,
+                    fontFamily: 'Pacifico',
                   ),
                 ),
                 onPressed: () {
@@ -85,8 +87,9 @@ class _QuizPageState extends State<QuizPage> {
                 child: Text(
                   'False',
                   style: TextStyle(
-                    fontSize: 25.0,
+                    fontSize: 30.0,
                     color: Colors.white,
+                    fontFamily: 'Pacifico',
                   ),
                 ),
                 onPressed: () {
