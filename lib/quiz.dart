@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import './question.dart';
+import './questionbank.dart';
+
+QuestionBank q = QuestionBank();
 
 class QuizPage extends StatefulWidget {
   @override
@@ -10,17 +12,9 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   int score = 0;
   int cur_question = 0;
-  List<Question> question = [
-    Question(q: 'Did lary page started google?', a: true),
-    Question(q: 'Did Paytm is US Based Company?', a: false),
-    Question(q: 'Is Kohli is still a captian for india?', a: true),
-    Question(q: 'Delhi is complete state in india?', a: false),
-    Question(q: 'PM Modi is feku?', a: true),
-    Question(q: 'Rahul Gandhi Can be a next PM?', a: true),
-  ];
   List<Icon> scoreKeeper = [];
-  void check(bool a, int q) {
-    if (question[q].QuestionAnswer == a) {
+  void check(bool a, int Q) {
+    if (q.question[Q].QuestionAnswer == a) {
       scoreKeeper.add(Icon(
         Icons.check,
         color: Colors.green,
@@ -37,7 +31,7 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    int val = question.indexOf(question.last) + 1;
+    int val = q.question.indexOf(q.question.last) + 1;
     return Scaffold(
       backgroundColor: Colors.lightBlue[500],
       body: Column(
@@ -50,8 +44,8 @@ class _QuizPageState extends State<QuizPage> {
               padding: EdgeInsets.all(10.0),
               child: Center(
                 child: Text(
-                  (cur_question < 6)
-                      ? question[cur_question].QuestionStatement
+                  (cur_question < val)
+                      ? q.question[cur_question].QuestionStatement
                       : 'Your score is $score out of $val',
                   textAlign: TextAlign.center,
                   style: TextStyle(
