@@ -11,10 +11,9 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   int score = 0;
-  int cur_question = 0;
   List<Icon> scoreKeeper = [];
-  void check(bool a, int Q) {
-    if (q.getQA(Q) == a) {
+  void check(bool a) {
+    if (q.getQA() == a) {
       scoreKeeper.add(Icon(
         Icons.check,
         color: Colors.green,
@@ -26,7 +25,6 @@ class _QuizPageState extends State<QuizPage> {
         color: Colors.red,
       ));
     }
-    cur_question = cur_question + 1;
   }
 
   @override
@@ -44,8 +42,8 @@ class _QuizPageState extends State<QuizPage> {
               padding: EdgeInsets.all(10.0),
               child: Center(
                 child: Text(
-                  (cur_question < val)
-                      ? q.getQuestionStatement(cur_question) + ' ?'
+                  (q.ifValidQuestion())
+                      ? q.getQuestionStatement() + ' ?'
                       : 'Your score is $score out of $val',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -73,7 +71,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    check(true, cur_question);
+                    check(true);
                   });
                 },
               ),
@@ -94,7 +92,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    check(false, cur_question);
+                    check(false);
                   });
                 },
               ),

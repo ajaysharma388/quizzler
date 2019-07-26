@@ -1,6 +1,7 @@
 import './question.dart';
 
 class QuestionBank {
+  int _currentQuestion = -1;
   List<Question> _question = [
     Question(q: 'Some cats are actually allergic to humans', a: true),
     Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
@@ -30,12 +31,18 @@ class QuestionBank {
         q: 'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',
         a: true),
   ];
-  String getQuestionStatement(int n) {
-    return _question[n].QuestionStatement;
+
+  bool ifValidQuestion() {
+    _currentQuestion++;
+    return (_currentQuestion < _question.length) ? true : false;
   }
 
-  bool getQA(int n) {
-    return _question[n].QuestionAnswer;
+  String getQuestionStatement() {
+    return _question[_currentQuestion].QuestionStatement;
+  }
+
+  bool getQA() {
+    return _question[_currentQuestion].QuestionAnswer;
   }
 
   int getTotalQuestion() {
