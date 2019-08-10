@@ -21,7 +21,7 @@ class _QuizPageState extends State<QuizPage> {
       title: "Quiz Over",
       desc:
           "Congratulation's you have completed the quiz.\n Your is $score out of"
-          "$totalQuestions",
+          " $totalQuestions",
     ).show();
   }
 
