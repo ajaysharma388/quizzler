@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import './questionbank.dart';
 
@@ -11,25 +12,44 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   int score = 0;
+  int totalQuestions = q.getTotalQuestion();
   List<Icon> scoreKeeper = [];
-  void check(bool a) {
-    if (q.getQA() == a) {
-      scoreKeeper.add(Icon(
-        Icons.check,
-        color: Colors.green,
-      ));
-      score = score + 1;
-    } else {
-      scoreKeeper.add(Icon(
-        Icons.close,
-        color: Colors.red,
-      ));
-    }
+
+  _onBasicAlertPressed(context) {
+    Alert(
+      context: context,
+      title: "Quiz Over",
+      desc:
+          "Congratulation's you have completed the quiz.\n Your is $score out of"
+          "$totalQuestions",
+    ).show();
+  }
+
+  void check(bool a, BuildContext context) {
+    setState(() {
+      if (q.getCorrectAnswer() == a) {
+        scoreKeeper.add(Icon(
+          Icons.check,
+          color: Colors.green,
+        ));
+        score = score + 1;
+      } else {
+        scoreKeeper.add(Icon(
+          Icons.close,
+          color: Colors.red,
+        ));
+      }
+      q.nextQuestion();
+      if (!q.isFinished()) {
+        scoreKeeper.clear();
+        _onBasicAlertPressed(context);
+        score = 0;
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    int val = q.getTotalQuestion();
     return Scaffold(
       backgroundColor: Colors.lightBlue[500],
       body: Column(
@@ -42,9 +62,7 @@ class _QuizPageState extends State<QuizPage> {
               padding: EdgeInsets.all(10.0),
               child: Center(
                 child: Text(
-                  (q.ifValidQuestion())
-                      ? q.getQuestionStatement() + ' ?'
-                      : 'Your score is $score out of $val',
+                  q.getQuestionText(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30.0,
@@ -70,9 +88,7 @@ class _QuizPageState extends State<QuizPage> {
                   ),
                 ),
                 onPressed: () {
-                  setState(() {
-                    check(true);
-                  });
+                  check(true, context);
                 },
               ),
             ),
@@ -91,9 +107,7 @@ class _QuizPageState extends State<QuizPage> {
                   ),
                 ),
                 onPressed: () {
-                  setState(() {
-                    check(false);
-                  });
+                  check(false, context);
                 },
               ),
             ),

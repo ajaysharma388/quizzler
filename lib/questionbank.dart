@@ -1,7 +1,7 @@
 import './question.dart';
 
 class QuestionBank {
-  int _currentQuestion = -1;
+  int _currentQuestion = 0;
   List<Question> _question = [
     Question(q: 'Some cats are actually allergic to humans', a: true),
     Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
@@ -31,21 +31,33 @@ class QuestionBank {
         q: 'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',
         a: true),
   ];
-
-  bool ifValidQuestion() {
-    _currentQuestion++;
-    return (_currentQuestion < _question.length) ? true : false;
+  void nextQuestion() {
+    if (_currentQuestion < _question.length) {
+      _currentQuestion++;
+    }
   }
 
-  String getQuestionStatement() {
+  String getQuestionText() {
     return _question[_currentQuestion].QuestionStatement;
   }
 
-  bool getQA() {
+  bool getCorrectAnswer() {
     return _question[_currentQuestion].QuestionAnswer;
   }
 
   int getTotalQuestion() {
-    return _question.indexOf(_question.last) + 1;
+    return _question.length;
+  }
+
+  void reStartQuiz() {
+    _currentQuestion = 0;
+  }
+
+  bool isFinished() {
+    if (_currentQuestion <= _question.length - 1) {
+      return true;
+    }
+    reStartQuiz();
+    return false;
   }
 }
